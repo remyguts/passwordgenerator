@@ -1,2 +1,1 @@
-# passwordgenerator
-HMWK#3
+#password generator
