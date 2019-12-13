@@ -1,8 +1,6 @@
-
-// generate random password
 function generate(){
 
-//set password length/complexity
+//set password length
 let complexity = document.getElementById("slider").value;
 
 let values = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()";
@@ -12,7 +10,6 @@ let password = "";
 for (var i= 0; i <= complexity; i++) {
  //learned about complexity!!
     password = password + values.charAt(Math.floor(Math.random * Math.floor(values.length - 1 )));
-
 }
 
 document.getElementById("display").value = password;
@@ -30,7 +27,7 @@ document.getElementById("slider").oninput = function(){
         document.getElementById("length").innerHTML = "Length: 1";
  }
 }
-//function to copy password to clipboard
+
 function copyPassword(){
 
     document.getElementById("display").select();
