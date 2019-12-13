@@ -1,75 +1,39 @@
-//dom elements
-const resultEl = document.getElementById('result');
-const lengthEl = document.getElementById('length');
-const uppercaseEl = document.getElementById('uppercase');
-const lowercaseEl = document.getElementById('lowercase');
-const numbersEl = document.getElementById('numbers');
-const symbolsEl = document.getElementById('symbols');
-const generateEl = document.getElementById('generate');
-const clipboardEl = document.getElementById('clipboard');
+// generate random password
+function generate(){
 
+//set password length/complexity
+let complexity = document.getElementById("slider").value;
 
+let values = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()";
+//constant vs let.... which one
+let password = ""; 
 
-const randomFunc = {
-    lower: getRandomLower,
-    upper: getRandomUpper,
-    number: getRandomNumber,
-    symbol: getRandomSymbol
-};
-//generate event
-generateEl.addEventListener('click', ( => {
-    const length = lengthEl.value;
-    const hasLower = lowercaseEl.checked
-    const hasUpper = uppercaseEl.checked
-    const hasNumber = numbersEl.checked
-    const hasSymbol = symbolsEl.checked
+for (var i= 0; i <= complexity; i++) {
+ //learned about complexity!!
+    password = password + values.charAt(Math.floor(Math.random * Math.floor(values.length - 1 )));
 
-    resultEl.innerText = generatePassword = (
-        hasLower, hasUpper, hasNumber, hasSymbol, length);
+}
 
+document.getElementById("display").value = password;
 
+document.getElementById("lastNums").innerHTML += password + "<br />";
+}
+document.getElementById("length").innerHTML = "Length: 25";
 
-});
+document.getElementById("slider").oninput = function(){
 
-//generate password function
-function generatePassword(lower, upper, number, symbol, length) {
-    let generatePassword = '';
-    const typesCount = lower + upper + numer + symbol;
-
-    const typesArr = [{ lower },{ upper },{ number },{ symbol }] .filter 
-    (item => Object.values(item)[0]
-    );
-
-    if(typesCount === 0) {
-        return '';
+    if(document.getElementById("slider").value > 0){
+        document.getElementById("length").innerHTML = "Length: " + document.getElementById("slider").value;
     }
-
-    for(let i=0; i < length; i += typesCount){
-        typesArr.forEach(type => { 
-            const funcName = Objest.keys (type) [0];
-
-
-        });
-    }
-
+    else{
+        document.getElementById("length").innerHTML = "Length: 1";
+ }
 }
+//function to copy password to clipboard
+function copyPassword(){
 
+    document.getElementById("display").select();
 
-function getRandomLower() {
-    return String.fromCharCode((Math.floor(Math.random() * 26) + 97);
+    document.execCommand("Copy");
 
-}
-
-function getRandomUpper() {
-    return String.fromCharCode((Math.floor(Math.random() * 26) + 65);
-
-}
-
-function getRandomNumber() {
-    return String.fromCharCode((Math.floor(Math.random() * 10) + 48);
-}
-
-function getRandomSymbol() {
-    const symbols = '!@#$%^&*()<>/.,';
-    return symbols[Math.floor(Math.random() * symbols.length)];
-}
+    alert("Password copied to clipboard");
